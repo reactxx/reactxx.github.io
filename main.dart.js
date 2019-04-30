@@ -6422,7 +6422,7 @@
               }
               t2 = t1.get$current();
               t3 = J.getInterceptor$x(t2);
-              $async$goto = t3.querySelector$1(t2, "span") != null ? 6 : 7;
+              $async$goto = t3.querySelector$1(t2, "span") == null ? 6 : 7;
               break;
             case 6:
               // then
