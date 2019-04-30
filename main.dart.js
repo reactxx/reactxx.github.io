@@ -1164,7 +1164,7 @@ if(u!=null){H.k(u)
 u=P.cY(u,0,u.length,C.d,!1)}else u=null
 return u}}return}},F={
 d9:function(){var u,t,s,r,q,p
-if(window.location.hostname==="localhost"){window.location.href="https://translate.google.cz/translate?hl=cs&sl=ar&tl=en&u=https%3A%2F%2Freactxx.github.io"
+if(window.location.hostname==="reactxx.github.io"){window.location.href="https://translate.google.cz/translate?hl=cs&sl=ar&tl=en&u=https%3A%2F%2Freactxx.github.io"
 return}u=U.ec("test")
 t=u==null
 s=t?0:P.ek(u)
