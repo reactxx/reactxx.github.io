@@ -2645,7 +2645,7 @@
                 _box_0 = {};
                 _box_0.lastPageIdx = t5;
                 firstWrong = H.interceptedTypeCheck(t4[i], "$isElement");
-                if (isTrans.call$1(firstWrong)) {
+                if (!isTrans.call$1(firstWrong)) {
                   // goto break c$0
                   $async$goto = 8;
                   break;
@@ -2673,7 +2673,6 @@
                     break;
                 }
                 pageIsTrans = new F.main_pageIsTrans(_box_0, i, isTrans, new W._FrozenElementList(t4, t3));
-                H.printString(C.JSInt_methods.toString$0(_box_0.lastPageIdx));
               case 10:
                 // do body
                 $async$goto = 13;
@@ -2689,6 +2688,7 @@
                 }
               case 12:
                 // after do
+                H.printString(C.JSInt_methods.toString$0(_box_0.lastPageIdx) + "/" + C.JSInt_methods.toString$0(i) + "/" + t4.length);
                 t5 = _box_0.lastPageIdx - 1;
                 if (t5 < 0 || t5 >= t4.length) {
                   $async$returnValue = H.ioore(t4, t5);
@@ -2714,6 +2714,7 @@
                 break;
               case 5:
                 // after for
+                window.alert("OK");
               case 1:
                 // return
                 return P._asyncReturn($async$returnValue, $async$completer);
@@ -4116,11 +4117,11 @@
   };
   F.main_pageIsTrans.prototype = {
     call$0: function() {
-      var jj, t1, t2, t3, t4;
-      for (jj = this.i, t1 = this._box_0, t2 = this.isTrans, t3 = this.col, t4 = t3._nodeList, t3 = H.getTypeArgumentByIndex(t3, 0); jj < t1.lastPageIdx; ++jj) {
-        if (jj >= t4.length)
-          return H.ioore(t4, jj);
-        if (!t2.call$1(H.assertSubtypeOfRuntimeType(t4[jj], t3)))
+      var j, t1, t2, t3, t4;
+      for (j = this.i, t1 = this._box_0, t2 = this.isTrans, t3 = this.col, t4 = t3._nodeList, t3 = H.getTypeArgumentByIndex(t3, 0); j < t1.lastPageIdx; ++j) {
+        if (j >= t4.length)
+          return H.ioore(t4, j);
+        if (!t2.call$1(H.assertSubtypeOfRuntimeType(t4[j], t3)))
           return false;
       }
       return true;
