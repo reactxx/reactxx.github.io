@@ -2602,7 +2602,7 @@
     main: function() {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(null),
-        $async$returnValue, t1, height, isTrans, t2, t3, t4, done, t5, i, firstWrong, t6, count, t7, lastPageIdx, lastMustBeOK, lastWrong, ph;
+        $async$returnValue, t1, height, isTrans, t2, t3, t4, done, t5, i, firstWrong, t6, count, t7, lastPageIdx, lastMustBeOK, ph;
       var $async$main = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1)
           return P._asyncRethrow($async$result, $async$completer);
@@ -2618,9 +2618,9 @@
                   break;
                 }
                 t1 = document;
-                t1.querySelector("#title").textContent = "V1";
+                t1.querySelector("#title").textContent = "V2";
                 $async$goto = 3;
-                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(400, 0), null), $async$main);
+                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
               case 3:
                 // returning from await.
                 height = t1.documentElement.clientHeight;
@@ -2652,7 +2652,7 @@
                 }
                 J.scrollIntoView$1$x(firstWrong, C.ScrollAlignment_TOP);
                 $async$goto = 9;
-                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(400, 0), null), $async$main);
+                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
               case 9:
                 // returning from await.
                 for (H.assertIsSubtype(t2, t2, "The type argument '", "' is not a subtype of the type variable bound '", "' of type variable 'T' in 'querySelectorAll'."), t6 = new W._FrozenElementList(t1.querySelectorAll("p"), t3), t6 = new H.ListIterator(t6, t6.get$length(t6), 0, t4), count = 0; t6.moveNext$0();) {
@@ -2661,9 +2661,8 @@
                   if (count % 1000 === 0)
                     H.printString(H.S(J.get$outerHtml$x(t7)));
                 }
-                for (lastPageIdx = i + 1, lastMustBeOK = firstWrong; lastPageIdx < t5.length; ++lastPageIdx, lastMustBeOK = lastWrong) {
-                  lastWrong = H.interceptedTypeCheck(t5[lastPageIdx], "$isElement");
-                  ph = lastWrong.getBoundingClientRect().bottom;
+                for (lastPageIdx = i + 1, lastMustBeOK = firstWrong; lastPageIdx < t5.length; ++lastPageIdx) {
+                  ph = H.interceptedTypeCheck(t5[lastPageIdx], "$isElement").getBoundingClientRect().bottom;
                   if (typeof height !== "number") {
                     $async$returnValue = H.iae(height);
                     // goto return
@@ -2672,6 +2671,14 @@
                   }
                   if (ph > height)
                     break;
+                  t6 = lastPageIdx - 100;
+                  if (t6 < 0 || t6 >= t5.length) {
+                    $async$returnValue = H.ioore(t5, t6);
+                    // goto return
+                    $async$goto = 1;
+                    break $async$outer;
+                  }
+                  lastMustBeOK = H.interceptedTypeCheck(t5[t6], "$isElement");
                 }
                 H.printString(C.JSInt_methods.toString$0(lastPageIdx));
               case 10:
@@ -2682,7 +2689,7 @@
                   break;
                 }
                 $async$goto = 12;
-                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(400, 0), null), $async$main);
+                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
               case 12:
                 // returning from await.
                 // goto for condition
