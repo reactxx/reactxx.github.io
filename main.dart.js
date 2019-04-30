@@ -2597,9 +2597,12 @@
   },
   F = {
     main: function() {
+      return F.main$body();
+    },
+    main$body: function() {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(null),
-        $async$returnValue, t1, height, isTrans, t2, t3, done, t4, firstWrongIdx, _box_0, lastPageIdx, t5, ph, pageIsTrans;
+        $async$returnValue, _box_0, t1, height, isTrans, t2, t3, t4, firstWrongIdx, lastPageIdx, t5, t6, ph, pageIsTrans;
       var $async$main = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1)
           return P._asyncRethrow($async$result, $async$completer);
@@ -2608,6 +2611,7 @@
             switch ($async$goto) {
               case 0:
                 // Function start
+                _box_0 = {};
                 if (window.location.hostname === "reactxx.github.io") {
                   C.Window_methods.open$2(window, "https://translate.google.cz/translate?hl=cs&sl=ar&tl=en&u=https%3A%2F%2Freactxx.github.io", "trans");
                   // goto return
@@ -2622,30 +2626,29 @@
                 // returning from await.
                 height = t1.documentElement.clientHeight;
                 isTrans = new F.main_isTrans();
-                t2 = W.Element, t3 = [t2], done = false;
+                _box_0.lastPageIdx = 0;
+                t2 = W.Element, t3 = [t2];
               case 4:
                 // for condition
-                if (!!done) {
+                // trivial condition
+                H.assertIsSubtype(t2, t2, "The type argument '", "' is not a subtype of the type variable bound '", "' of type variable 'T' in 'querySelectorAll'.");
+                t4 = t1.querySelectorAll("p");
+                firstWrongIdx = _box_0.lastPageIdx;
+                if (firstWrongIdx === t4.length) {
                   // goto after for
                   $async$goto = 5;
                   break;
                 }
-                H.assertIsSubtype(t2, t2, "The type argument '", "' is not a subtype of the type variable bound '", "' of type variable 'T' in 'querySelectorAll'.");
-                t4 = t1.querySelectorAll("p");
-                firstWrongIdx = 0;
               case 6:
-                // while condition
+                // for condition
                 if (!(firstWrongIdx < t4.length)) {
-                  done = true;
-                  // goto after while
-                  $async$goto = 7;
+                  // goto after for
+                  $async$goto = 8;
                   break;
                 }
-                _box_0 = {};
-                _box_0.lastPageIdx = null;
                 if (!isTrans.call$1(H.interceptedTypeCheck(t4[firstWrongIdx], "$isElement"))) {
-                  // goto break c$0
-                  $async$goto = 8;
+                  // goto for update
+                  $async$goto = 7;
                   break;
                 }
                 if (firstWrongIdx >= t4.length) {
@@ -2655,11 +2658,12 @@
                   break;
                 }
                 J.scrollIntoView$1$x(H.interceptedTypeCheck(t4[firstWrongIdx], "$isElement"), C.ScrollAlignment_TOP);
-                lastPageIdx = firstWrongIdx + 1;
-                _box_0.lastPageIdx = lastPageIdx;
-                t5 = lastPageIdx;
-                while (t5 < t4.length) {
-                  if (t5 < 0 || t5 >= t4.length) {
+                $async$goto = 9;
+                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
+              case 9:
+                // returning from await.
+                for (lastPageIdx = firstWrongIdx + 1, _box_0.lastPageIdx = lastPageIdx, t5 = lastPageIdx; t6 = t4.length, t5 < t6; t5 = ++_box_0.lastPageIdx) {
+                  if (t5 < 0) {
                     $async$returnValue = H.ioore(t4, t5);
                     // goto return
                     $async$goto = 1;
@@ -2674,42 +2678,25 @@
                   }
                   if (ph > height)
                     break;
-                  t5 = _box_0.lastPageIdx;
-                  if (typeof t5 !== "number") {
-                    $async$returnValue = t5.$add();
-                    // goto return
-                    $async$goto = 1;
-                    break $async$outer;
-                  }
-                  lastPageIdx = t5 + 1;
-                  _box_0.lastPageIdx = lastPageIdx;
-                  t5 = lastPageIdx;
                 }
                 pageIsTrans = new F.main_pageIsTrans(_box_0, firstWrongIdx, isTrans, new W._FrozenElementList(t4, t3));
-              case 9:
-                // do body
-                $async$goto = 12;
-                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
-              case 12:
-                // returning from await.
               case 10:
+                // do body
+                $async$goto = 13;
+                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
+              case 13:
+                // returning from await.
+              case 11:
                 // do condition
                 if (!pageIsTrans.call$0()) {
                   // goto do body
-                  $async$goto = 9;
+                  $async$goto = 10;
                   break;
                 }
-              case 11:
+              case 12:
                 // after do
-                H.printString(J.toString$0$(_box_0.lastPageIdx) + "/" + C.JSInt_methods.toString$0(firstWrongIdx) + "/" + t4.length);
-                t5 = _box_0.lastPageIdx;
-                if (typeof t5 !== "number") {
-                  $async$returnValue = t5.$sub();
-                  // goto return
-                  $async$goto = 1;
-                  break;
-                }
-                --t5;
+                H.printString(C.JSInt_methods.toString$0(_box_0.lastPageIdx) + "/" + C.JSInt_methods.toString$0(firstWrongIdx) + "/" + t4.length);
+                t5 = _box_0.lastPageIdx - 1;
                 if (t5 < 0 || t5 >= t4.length) {
                   $async$returnValue = H.ioore(t4, t5);
                   // goto return
@@ -2717,18 +2704,21 @@
                   break;
                 }
                 J.scrollIntoView$1$x(H.interceptedTypeCheck(t4[t5], "$isElement"), C.ScrollAlignment_TOP);
-                done = false;
-                // goto after while
-                $async$goto = 7;
-                break;
-              case 8:
-                // break c$0
-                ++firstWrongIdx;
-                // goto while condition
-                $async$goto = 6;
+                $async$goto = 14;
+                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
+              case 14:
+                // returning from await.
+                // goto after for
+                $async$goto = 8;
                 break;
               case 7:
-                // after while
+                // for update
+                ++firstWrongIdx;
+                // goto for condition
+                $async$goto = 6;
+                break;
+              case 8:
+                // after for
                 // goto for condition
                 $async$goto = 4;
                 break;
@@ -3890,7 +3880,10 @@
       return this._nodeList.length;
     },
     $index: function(_, index) {
-      return H.assertSubtypeOfRuntimeType(C.NodeList_methods.$index(this._nodeList, index), H.getTypeArgumentByIndex(this, 0));
+      var t1 = this._nodeList;
+      if (index < 0 || index >= t1.length)
+        return H.ioore(t1, index);
+      return H.assertSubtypeOfRuntimeType(t1[index], H.getTypeArgumentByIndex(this, 0));
     }
   };
   W.Element.prototype = {
@@ -4134,24 +4127,12 @@
   };
   F.main_pageIsTrans.prototype = {
     call$0: function() {
-      var j, t1, t2, t3, t4, t5;
-      j = this.firstWrongIdx;
-      t1 = this._box_0;
-      t2 = this.isTrans;
-      t3 = this.col;
-      t4 = t3._nodeList;
-      t3 = H.getTypeArgumentByIndex(t3, 0);
-      while (true) {
-        t5 = t1.lastPageIdx;
-        if (typeof t5 !== "number")
-          return H.iae(t5);
-        if (!(j < t5))
-          break;
+      var j, t1, t2, t3, t4;
+      for (j = this.firstWrongIdx, t1 = this._box_0, t2 = this.isTrans, t3 = this.col, t4 = t3._nodeList, t3 = H.getTypeArgumentByIndex(t3, 0); j < t1.lastPageIdx; ++j) {
         if (j >= t4.length)
           return H.ioore(t4, j);
         if (!t2.call$1(H.assertSubtypeOfRuntimeType(t4[j], t3)))
           return false;
-        ++j;
       }
       return true;
     },
