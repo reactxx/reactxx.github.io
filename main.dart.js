@@ -225,36 +225,28 @@
   }
   var C = {},
   H = {JS_CONST: function JS_CONST() {
-    },
-    IterableElementError_noElement: function() {
-      return new P.StateError("No element");
-    },
-    ListIterator: function ListIterator(t0, t1, t2, t3) {
+    }, ListIterator: function ListIterator(t0, t1, t2, t3) {
       var _ = this;
       _.__internal$_iterable = t0;
       _.__internal$_length = t1;
       _.__internal$_index = t2;
-      _.__internal$_current = null;
+      _._current = null;
       _.$ti = t3;
-    },
-    MappedIterable: function MappedIterable(t0, t1, t2) {
+    }, MappedIterable: function MappedIterable(t0, t1, t2) {
       this.__internal$_iterable = t0;
       this._f = t1;
       this.$ti = t2;
-    },
-    MappedIterator: function MappedIterator(t0, t1, t2) {
+    }, MappedIterator: function MappedIterator(t0, t1, t2) {
       var _ = this;
-      _.__internal$_current = null;
+      _._current = null;
       _._iterator = t0;
       _._f = t1;
       _.$ti = t2;
-    },
-    WhereIterable: function WhereIterable(t0, t1, t2) {
+    }, WhereIterable: function WhereIterable(t0, t1, t2) {
       this.__internal$_iterable = t0;
       this._f = t1;
       this.$ti = t2;
-    },
-    WhereIterator: function WhereIterator(t0, t1, t2) {
+    }, WhereIterator: function WhereIterator(t0, t1, t2) {
       this._iterator = t0;
       this._f = t1;
       this.$ti = t2;
@@ -1668,6 +1660,9 @@
     get$length$asx: function(receiver) {
       return J.getInterceptor$asx(receiver).get$length(receiver);
     },
+    get$outerHtml$x: function(receiver) {
+      return J.getInterceptor$x(receiver).get$outerHtml(receiver);
+    },
     $index$asx: function(receiver, a0) {
       if (typeof a0 === "number")
         if (receiver.constructor == Array || typeof receiver == "string" || H.isJsIndexable(receiver, receiver[init.dispatchPropertyName]))
@@ -1706,7 +1701,7 @@
       _._iterable = t0;
       _._length = t1;
       _._index = t2;
-      _._current = null;
+      _.__interceptors$_current = null;
       _.$ti = t3;
     },
     JSNumber: function JSNumber() {
@@ -2607,7 +2602,7 @@
     main: function() {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(null),
-        $async$returnValue, t1, height, isTrans, t2, done, t3, i, firstWrong, lastPageIdx, lastMustBeOK, lastWrong, ph;
+        $async$returnValue, t1, height, isTrans, t2, t3, t4, done, t5, i, firstWrong, t6, count, t7, lastPageIdx, lastMustBeOK, lastWrong, ph;
       var $async$main = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1)
           return P._asyncRethrow($async$result, $async$completer);
@@ -2630,7 +2625,7 @@
                 // returning from await.
                 height = t1.documentElement.clientHeight;
                 isTrans = new F.main_isTrans();
-                t2 = W.Element, done = false;
+                t2 = W.Element, t3 = [t2], t4 = [t2], done = false;
               case 4:
                 // for condition
                 if (!!done) {
@@ -2639,17 +2634,17 @@
                   break;
                 }
                 H.assertIsSubtype(t2, t2, "The type argument '", "' is not a subtype of the type variable bound '", "' of type variable 'T' in 'querySelectorAll'.");
-                t3 = t1.querySelectorAll("p");
+                t5 = t1.querySelectorAll("p");
                 i = 0;
               case 6:
                 // while condition
-                if (!(i < t3.length)) {
+                if (!(i < t5.length)) {
                   done = true;
                   // goto after while
                   $async$goto = 7;
                   break;
                 }
-                firstWrong = H.interceptedTypeCheck(t3[i], "$isElement");
+                firstWrong = H.interceptedTypeCheck(t5[i], "$isElement");
                 if (isTrans.call$1(firstWrong)) {
                   // goto break c$0
                   $async$goto = 8;
@@ -2660,8 +2655,14 @@
                 return P._asyncAwait(P.Future_Future$delayed(P.Duration$(400, 0), null), $async$main);
               case 9:
                 // returning from await.
-                for (lastPageIdx = i + 1, lastMustBeOK = firstWrong; lastPageIdx < t3.length; ++lastPageIdx, lastMustBeOK = lastWrong) {
-                  lastWrong = H.interceptedTypeCheck(t3[lastPageIdx], "$isElement");
+                for (H.assertIsSubtype(t2, t2, "The type argument '", "' is not a subtype of the type variable bound '", "' of type variable 'T' in 'querySelectorAll'."), t6 = new W._FrozenElementList(t1.querySelectorAll("p"), t3), t6 = new H.ListIterator(t6, t6.get$length(t6), 0, t4), count = 0; t6.moveNext$0();) {
+                  t7 = t6._current;
+                  ++count;
+                  if (count % 1000 === 0)
+                    H.printString(H.S(J.get$outerHtml$x(t7)));
+                }
+                for (lastPageIdx = i + 1, lastMustBeOK = firstWrong; lastPageIdx < t5.length; ++lastPageIdx, lastMustBeOK = lastWrong) {
+                  lastWrong = H.interceptedTypeCheck(t5[lastPageIdx], "$isElement");
                   ph = lastWrong.getBoundingClientRect().bottom;
                   if (typeof height !== "number") {
                     $async$returnValue = H.iae(height);
@@ -2794,7 +2795,7 @@
   J.JSUnmodifiableArray.prototype = {};
   J.ArrayIterator.prototype = {
     get$current: function() {
-      return this._current;
+      return this.__interceptors$_current;
     },
     moveNext$0: function() {
       var t1, $length, t2;
@@ -2804,15 +2805,15 @@
         throw H.wrapException(H.throwConcurrentModificationError(t1));
       t2 = this._index;
       if (t2 >= $length) {
-        this.set$_current(null);
+        this.set$__interceptors$_current(null);
         return false;
       }
-      this.set$_current(t1[t2]);
+      this.set$__interceptors$_current(t1[t2]);
       ++this._index;
       return true;
     },
-    set$_current: function(_current) {
-      this._current = H.assertSubtypeOfRuntimeType(_current, H.getTypeArgumentByIndex(this, 0));
+    set$__interceptors$_current: function(_current) {
+      this.__interceptors$_current = H.assertSubtypeOfRuntimeType(_current, H.getTypeArgumentByIndex(this, 0));
     },
     $isIterator: 1
   };
@@ -2875,7 +2876,7 @@
   };
   H.ListIterator.prototype = {
     get$current: function() {
-      return this.__internal$_current;
+      return this._current;
     },
     moveNext$0: function() {
       var t1, t2, $length, t3;
@@ -2886,15 +2887,15 @@
         throw H.wrapException(P.ConcurrentModificationError$(t1));
       t3 = this.__internal$_index;
       if (t3 >= $length) {
-        this.set$__internal$_current(null);
+        this.set$_current(null);
         return false;
       }
-      this.set$__internal$_current(t2.elementAt$1(t1, t3));
+      this.set$_current(t2.elementAt$1(t1, t3));
       ++this.__internal$_index;
       return true;
     },
-    set$__internal$_current: function(_current) {
-      this.__internal$_current = H.assertSubtypeOfRuntimeType(_current, H.getTypeArgumentByIndex(this, 0));
+    set$_current: function(_current) {
+      this._current = H.assertSubtypeOfRuntimeType(_current, H.getTypeArgumentByIndex(this, 0));
     },
     $isIterator: 1
   };
@@ -2918,17 +2919,17 @@
     moveNext$0: function() {
       var t1 = this._iterator;
       if (t1.moveNext$0()) {
-        this.set$__internal$_current(this._f.call$1(t1.get$current()));
+        this.set$_current(this._f.call$1(t1.get$current()));
         return true;
       }
-      this.set$__internal$_current(null);
+      this.set$_current(null);
       return false;
     },
     get$current: function() {
-      return this.__internal$_current;
+      return this._current;
     },
-    set$__internal$_current: function(_current) {
-      this.__internal$_current = H.assertSubtypeOfRuntimeType(_current, H.getTypeArgumentByIndex(this, 1));
+    set$_current: function(_current) {
+      this._current = H.assertSubtypeOfRuntimeType(_current, H.getTypeArgumentByIndex(this, 1));
     },
     $asIterator: function($S, $T) {
       return [$T];
@@ -3587,11 +3588,6 @@
     elementAt$1: function(receiver, index) {
       return this.$index(receiver, index);
     },
-    get$first: function(receiver) {
-      if (this.get$length(receiver) === 0)
-        throw H.wrapException(H.IterableElementError_noElement());
-      return this.$index(receiver, 0);
-    },
     toList$0: function(receiver) {
       var result, i;
       result = H.setRuntimeTypeInfo([], [H.getRuntimeTypeArgumentIntercepted(this, receiver, "ListMixin", 0)]);
@@ -3845,12 +3841,6 @@
       var t1 = this.toList$0(this);
       return new J.ArrayIterator(t1, t1.length, 0, [H.getTypeArgumentByIndex(t1, 0)]);
     },
-    get$first: function(_) {
-      var result = this._element.firstElementChild;
-      if (result == null)
-        throw H.wrapException(P.StateError$("No elements"));
-      return result;
-    },
     $asListMixin: function() {
       return [W.Element];
     },
@@ -3892,6 +3882,9 @@
           receiver.scrollIntoViewIfNeeded();
       else
         receiver.scrollIntoView();
+    },
+    get$outerHtml: function(receiver) {
+      return receiver.outerHTML;
     },
     $isElement: 1
   };
@@ -4102,12 +4095,18 @@
   P.SvgElement.prototype = {
     get$children: function(receiver) {
       return new P.FilteredElementList(new W._ChildNodeListLazy(receiver));
-    }
+    },
+    get$outerHtml: function(receiver) {
+      var container = document.createElement("div");
+      container.appendChild(H.interceptedTypeCheck(receiver.cloneNode(true), "$isSvgElement"));
+      return container.innerHTML;
+    },
+    $isSvgElement: 1
   };
   F.main_isTrans.prototype = {
     call$1: function(el) {
       var t1 = J.get$children$x(el);
-      return t1.get$first(t1).nodeType === 1;
+      return t1.get$length(t1) > 0;
     },
     $signature: 18
   };
