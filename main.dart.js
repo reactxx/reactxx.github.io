@@ -230,7 +230,7 @@
       _.__internal$_iterable = t0;
       _.__internal$_length = t1;
       _.__internal$_index = t2;
-      _._current = null;
+      _.__internal$_current = null;
       _.$ti = t3;
     }, MappedIterable: function MappedIterable(t0, t1, t2) {
       this.__internal$_iterable = t0;
@@ -238,7 +238,7 @@
       this.$ti = t2;
     }, MappedIterator: function MappedIterator(t0, t1, t2) {
       var _ = this;
-      _._current = null;
+      _.__internal$_current = null;
       _._iterator = t0;
       _._f = t1;
       _.$ti = t2;
@@ -1660,9 +1660,6 @@
     get$length$asx: function(receiver) {
       return J.getInterceptor$asx(receiver).get$length(receiver);
     },
-    get$outerHtml$x: function(receiver) {
-      return J.getInterceptor$x(receiver).get$outerHtml(receiver);
-    },
     $index$asx: function(receiver, a0) {
       if (typeof a0 === "number")
         if (receiver.constructor == Array || typeof receiver == "string" || H.isJsIndexable(receiver, receiver[init.dispatchPropertyName]))
@@ -1701,7 +1698,7 @@
       _._iterable = t0;
       _._length = t1;
       _._index = t2;
-      _.__interceptors$_current = null;
+      _._current = null;
       _.$ti = t3;
     },
     JSNumber: function JSNumber() {
@@ -2602,7 +2599,7 @@
     main: function() {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(null),
-        $async$returnValue, t1, height, isTrans, t2, t3, t4, done, t5, i, firstWrong, t6, count, t7, lastPageIdx, lastMustBeOK, ph;
+        $async$returnValue, t1, height, isTrans, t2, done, t3, i, firstWrong, lastPageIdx, lastMustBeOK, ph, t4;
       var $async$main = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1)
           return P._asyncRethrow($async$result, $async$completer);
@@ -2625,7 +2622,7 @@
                 // returning from await.
                 height = t1.documentElement.clientHeight;
                 isTrans = new F.main_isTrans();
-                t2 = W.Element, t3 = [t2], t4 = [t2], done = false;
+                t2 = W.Element, done = false;
               case 4:
                 // for condition
                 if (!!done) {
@@ -2634,17 +2631,17 @@
                   break;
                 }
                 H.assertIsSubtype(t2, t2, "The type argument '", "' is not a subtype of the type variable bound '", "' of type variable 'T' in 'querySelectorAll'.");
-                t5 = t1.querySelectorAll("p");
+                t3 = t1.querySelectorAll("p");
                 i = 0;
               case 6:
                 // while condition
-                if (!(i < t5.length)) {
+                if (!(i < t3.length)) {
                   done = true;
                   // goto after while
                   $async$goto = 7;
                   break;
                 }
-                firstWrong = H.interceptedTypeCheck(t5[i], "$isElement");
+                firstWrong = H.interceptedTypeCheck(t3[i], "$isElement");
                 if (isTrans.call$1(firstWrong)) {
                   // goto break c$0
                   $async$goto = 8;
@@ -2655,14 +2652,8 @@
                 return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
               case 9:
                 // returning from await.
-                for (H.assertIsSubtype(t2, t2, "The type argument '", "' is not a subtype of the type variable bound '", "' of type variable 'T' in 'querySelectorAll'."), t6 = new W._FrozenElementList(t1.querySelectorAll("p"), t3), t6 = new H.ListIterator(t6, t6.get$length(t6), 0, t4), count = 0; t6.moveNext$0();) {
-                  t7 = t6._current;
-                  ++count;
-                  if (count % 1000 === 0)
-                    H.printString(H.S(J.get$outerHtml$x(t7)));
-                }
-                for (lastPageIdx = i + 1, lastMustBeOK = firstWrong; lastPageIdx < t5.length; ++lastPageIdx) {
-                  ph = H.interceptedTypeCheck(t5[lastPageIdx], "$isElement").getBoundingClientRect().bottom;
+                for (lastPageIdx = i + 1, lastMustBeOK = firstWrong; lastPageIdx < t3.length; ++lastPageIdx) {
+                  ph = H.interceptedTypeCheck(t3[lastPageIdx], "$isElement").getBoundingClientRect().bottom;
                   if (typeof height !== "number") {
                     $async$returnValue = H.iae(height);
                     // goto return
@@ -2671,14 +2662,14 @@
                   }
                   if (ph > height)
                     break;
-                  t6 = lastPageIdx - 100;
-                  if (t6 < 0 || t6 >= t5.length) {
-                    $async$returnValue = H.ioore(t5, t6);
+                  t4 = lastPageIdx - 30;
+                  if (t4 < 0 || t4 >= t3.length) {
+                    $async$returnValue = H.ioore(t3, t4);
                     // goto return
                     $async$goto = 1;
                     break $async$outer;
                   }
-                  lastMustBeOK = H.interceptedTypeCheck(t5[t6], "$isElement");
+                  lastMustBeOK = H.interceptedTypeCheck(t3[t4], "$isElement");
                 }
                 H.printString(C.JSInt_methods.toString$0(lastPageIdx));
               case 10:
@@ -2802,7 +2793,7 @@
   J.JSUnmodifiableArray.prototype = {};
   J.ArrayIterator.prototype = {
     get$current: function() {
-      return this.__interceptors$_current;
+      return this._current;
     },
     moveNext$0: function() {
       var t1, $length, t2;
@@ -2812,15 +2803,15 @@
         throw H.wrapException(H.throwConcurrentModificationError(t1));
       t2 = this._index;
       if (t2 >= $length) {
-        this.set$__interceptors$_current(null);
+        this.set$_current(null);
         return false;
       }
-      this.set$__interceptors$_current(t1[t2]);
+      this.set$_current(t1[t2]);
       ++this._index;
       return true;
     },
-    set$__interceptors$_current: function(_current) {
-      this.__interceptors$_current = H.assertSubtypeOfRuntimeType(_current, H.getTypeArgumentByIndex(this, 0));
+    set$_current: function(_current) {
+      this._current = H.assertSubtypeOfRuntimeType(_current, H.getTypeArgumentByIndex(this, 0));
     },
     $isIterator: 1
   };
@@ -2883,7 +2874,7 @@
   };
   H.ListIterator.prototype = {
     get$current: function() {
-      return this._current;
+      return this.__internal$_current;
     },
     moveNext$0: function() {
       var t1, t2, $length, t3;
@@ -2894,15 +2885,15 @@
         throw H.wrapException(P.ConcurrentModificationError$(t1));
       t3 = this.__internal$_index;
       if (t3 >= $length) {
-        this.set$_current(null);
+        this.set$__internal$_current(null);
         return false;
       }
-      this.set$_current(t2.elementAt$1(t1, t3));
+      this.set$__internal$_current(t2.elementAt$1(t1, t3));
       ++this.__internal$_index;
       return true;
     },
-    set$_current: function(_current) {
-      this._current = H.assertSubtypeOfRuntimeType(_current, H.getTypeArgumentByIndex(this, 0));
+    set$__internal$_current: function(_current) {
+      this.__internal$_current = H.assertSubtypeOfRuntimeType(_current, H.getTypeArgumentByIndex(this, 0));
     },
     $isIterator: 1
   };
@@ -2926,17 +2917,17 @@
     moveNext$0: function() {
       var t1 = this._iterator;
       if (t1.moveNext$0()) {
-        this.set$_current(this._f.call$1(t1.get$current()));
+        this.set$__internal$_current(this._f.call$1(t1.get$current()));
         return true;
       }
-      this.set$_current(null);
+      this.set$__internal$_current(null);
       return false;
     },
     get$current: function() {
-      return this._current;
+      return this.__internal$_current;
     },
-    set$_current: function(_current) {
-      this._current = H.assertSubtypeOfRuntimeType(_current, H.getTypeArgumentByIndex(this, 1));
+    set$__internal$_current: function(_current) {
+      this.__internal$_current = H.assertSubtypeOfRuntimeType(_current, H.getTypeArgumentByIndex(this, 1));
     },
     $asIterator: function($S, $T) {
       return [$T];
@@ -3890,9 +3881,6 @@
       else
         receiver.scrollIntoView();
     },
-    get$outerHtml: function(receiver) {
-      return receiver.outerHTML;
-    },
     $isElement: 1
   };
   W.ScrollAlignment.prototype = {
@@ -4102,13 +4090,7 @@
   P.SvgElement.prototype = {
     get$children: function(receiver) {
       return new P.FilteredElementList(new W._ChildNodeListLazy(receiver));
-    },
-    get$outerHtml: function(receiver) {
-      var container = document.createElement("div");
-      container.appendChild(H.interceptedTypeCheck(receiver.cloneNode(true), "$isSvgElement"));
-      return container.innerHTML;
-    },
-    $isSvgElement: 1
+    }
   };
   F.main_isTrans.prototype = {
     call$1: function(el) {
