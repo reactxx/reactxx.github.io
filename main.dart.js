@@ -1167,7 +1167,6 @@ d9:function(){var u,t,s,r,q,p
 if(window.location.hostname==="localhost"){window.location.href="https://translate.google.cz/translate?hl=cs&sl=ar&tl=en&u=https%3A%2F%2Freactxx.github.io"
 return}u=U.ec("test")
 t=u==null
-if(!t)window.alert(u)
 s=t?0:P.ek(u)
 if(typeof s!=="number")return s.A()
 r=C.c.h(s+1)
