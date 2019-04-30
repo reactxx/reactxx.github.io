@@ -2653,10 +2653,16 @@
                 $scroll = new F.main_scroll(col, delay);
                 pageIsTrans = new F.main_pageIsTrans(_box_0, isTrans, col);
                 $async$goto = 6;
-                return P._asyncAwait($scroll.call$1(_box_0.firstNonTranslated), $async$main);
+                return P._asyncAwait($scroll.call$1(_box_0.firstNonTranslated - 1), $async$main);
               case 6:
                 // returning from await.
-                for (lastInPage = _box_0.firstNonTranslated + 1, _box_0.lastInPage = lastInPage, t5 = lastInPage; t6 = t4.length, t5 < t6; t5 = ++_box_0.lastInPage) {
+                t5 = _box_0.firstNonTranslated;
+                if (t5 === t4.length) {
+                  // goto after for
+                  $async$goto = 5;
+                  break;
+                }
+                for (lastInPage = t5 + 1, _box_0.lastInPage = lastInPage, t5 = lastInPage; t6 = t4.length, t5 < t6; t5 = ++_box_0.lastInPage) {
                   if (t5 < 0) {
                     $async$returnValue = H.ioore(t4, t5);
                     // goto return
