@@ -2380,7 +2380,7 @@
     main: function() {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(null),
-        $async$returnValue, t1, height, t2, t3, i, firstWrong, lastPageIdx, lastMustBeOK, lastWrong, ph;
+        $async$returnValue, t1, height, t2, done, t3, i, firstWrong, lastPageIdx, lastMustBeOK, lastWrong, ph;
       var $async$main = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1)
           return P._asyncRethrow($async$result, $async$completer);
@@ -2401,27 +2401,36 @@
                 // returning from await.
                 t1 = document;
                 height = t1.documentElement.clientHeight;
-                t2 = W.Element;
+                t2 = W.Element, done = false;
               case 4:
                 // for condition
-                // trivial condition
+                if (!!done) {
+                  // goto after for
+                  $async$goto = 5;
+                  break;
+                }
                 H.assertIsSubtype(t2, t2, "The type argument '", "' is not a subtype of the type variable bound '", "' of type variable 'T' in 'querySelectorAll'.");
                 t3 = t1.querySelectorAll("p");
                 i = 0;
               case 6:
-                // for condition
+                // while condition
                 if (!(i < t3.length)) {
-                  // goto after for
-                  $async$goto = 8;
+                  done = true;
+                  // goto after while
+                  $async$goto = 7;
                   break;
                 }
                 firstWrong = H.interceptedTypeCheck(t3[i], "$isElement");
                 if (firstWrong.querySelector("span") != null) {
-                  // goto for update
-                  $async$goto = 7;
+                  // goto break c$0
+                  $async$goto = 8;
                   break;
                 }
                 J.scrollIntoView$1$x(firstWrong, C.ScrollAlignment_TOP);
+                $async$goto = 9;
+                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(400, 0), null), $async$main);
+              case 9:
+                // returning from await.
                 for (lastPageIdx = i + 1, lastMustBeOK = firstWrong; lastPageIdx < t3.length; ++lastPageIdx, lastMustBeOK = lastWrong) {
                   lastWrong = H.interceptedTypeCheck(t3[lastPageIdx], "$isElement");
                   ph = lastWrong.getBoundingClientRect().bottom;
@@ -2435,31 +2444,35 @@
                     break;
                 }
                 H.printString(C.JSInt_methods.toString$0(lastPageIdx));
-              case 9:
+              case 10:
                 // for condition
                 if (!(lastMustBeOK.querySelector("span") == null)) {
                   // goto after for
-                  $async$goto = 10;
+                  $async$goto = 11;
                   break;
                 }
-                $async$goto = 11;
+                $async$goto = 12;
                 return P._asyncAwait(P.Future_Future$delayed(P.Duration$(400, 0), null), $async$main);
-              case 11:
+              case 12:
                 // returning from await.
                 // goto for condition
-                $async$goto = 9;
+                $async$goto = 10;
                 break;
-              case 10:
+              case 11:
                 // after for
                 J.scrollIntoView$1$x(lastMustBeOK, C.ScrollAlignment_TOP);
-              case 7:
-                // for update
-                ++i;
-                // goto for condition
-                $async$goto = 6;
+                done = false;
+                // goto after while
+                $async$goto = 7;
                 break;
               case 8:
-                // after for
+                // break c$0
+                ++i;
+                // goto while condition
+                $async$goto = 6;
+                break;
+              case 7:
+                // after while
                 // goto for condition
                 $async$goto = 4;
                 break;
