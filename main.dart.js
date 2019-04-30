@@ -2599,7 +2599,7 @@
     main: function() {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(null),
-        $async$returnValue, t1, height, isTrans, t2, done, t3, i, firstWrong, lastPageIdx, lastMustBeOK, ph, t4;
+        $async$returnValue, t1, height, isTrans, t2, t3, done, t4, i, t5, _box_0, firstWrong, lastPageIdx, t6, ph, pageIsTrans;
       var $async$main = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1)
           return P._asyncRethrow($async$result, $async$completer);
@@ -2622,7 +2622,7 @@
                 // returning from await.
                 height = t1.documentElement.clientHeight;
                 isTrans = new F.main_isTrans();
-                t2 = W.Element, done = false;
+                t2 = W.Element, t3 = [t2], done = false;
               case 4:
                 // for condition
                 if (!!done) {
@@ -2631,17 +2631,20 @@
                   break;
                 }
                 H.assertIsSubtype(t2, t2, "The type argument '", "' is not a subtype of the type variable bound '", "' of type variable 'T' in 'querySelectorAll'.");
-                t3 = t1.querySelectorAll("p");
+                t4 = t1.querySelectorAll("p");
                 i = 0;
               case 6:
                 // while condition
-                if (!(i < t3.length)) {
+                t5 = t4.length;
+                if (!(i < t5)) {
                   done = true;
                   // goto after while
                   $async$goto = 7;
                   break;
                 }
-                firstWrong = H.interceptedTypeCheck(t3[i], "$isElement");
+                _box_0 = {};
+                _box_0.lastPageIdx = t5;
+                firstWrong = H.interceptedTypeCheck(t4[i], "$isElement");
                 if (isTrans.call$1(firstWrong)) {
                   // goto break c$0
                   $async$goto = 8;
@@ -2652,8 +2655,14 @@
                 return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
               case 9:
                 // returning from await.
-                for (lastPageIdx = i + 1, lastMustBeOK = firstWrong; lastPageIdx < t3.length; ++lastPageIdx) {
-                  ph = H.interceptedTypeCheck(t3[lastPageIdx], "$isElement").getBoundingClientRect().bottom;
+                for (lastPageIdx = i + 1, _box_0.lastPageIdx = lastPageIdx, t5 = lastPageIdx; t6 = t4.length, t5 < t6; t5 = ++_box_0.lastPageIdx) {
+                  if (t5 < 0) {
+                    $async$returnValue = H.ioore(t4, t5);
+                    // goto return
+                    $async$goto = 1;
+                    break $async$outer;
+                  }
+                  ph = H.interceptedTypeCheck(t4[t5], "$isElement").getBoundingClientRect().bottom;
                   if (typeof height !== "number") {
                     $async$returnValue = H.iae(height);
                     // goto return
@@ -2662,33 +2671,32 @@
                   }
                   if (ph > height)
                     break;
-                  t4 = lastPageIdx - 30;
-                  if (t4 < 0 || t4 >= t3.length) {
-                    $async$returnValue = H.ioore(t3, t4);
-                    // goto return
-                    $async$goto = 1;
-                    break $async$outer;
-                  }
-                  lastMustBeOK = H.interceptedTypeCheck(t3[t4], "$isElement");
                 }
-                H.printString(C.JSInt_methods.toString$0(lastPageIdx));
+                pageIsTrans = new F.main_pageIsTrans(_box_0, i, isTrans, new W._FrozenElementList(t4, t3));
+                H.printString(C.JSInt_methods.toString$0(_box_0.lastPageIdx));
               case 10:
-                // for condition
-                if (!!isTrans.call$1(lastMustBeOK)) {
-                  // goto after for
-                  $async$goto = 11;
+                // do body
+                $async$goto = 13;
+                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
+              case 13:
+                // returning from await.
+              case 11:
+                // do condition
+                if (!pageIsTrans.call$0()) {
+                  // goto do body
+                  $async$goto = 10;
                   break;
                 }
-                $async$goto = 12;
-                return P._asyncAwait(P.Future_Future$delayed(P.Duration$(200, 0), null), $async$main);
               case 12:
-                // returning from await.
-                // goto for condition
-                $async$goto = 10;
-                break;
-              case 11:
-                // after for
-                J.scrollIntoView$1$x(lastMustBeOK, C.ScrollAlignment_TOP);
+                // after do
+                t5 = _box_0.lastPageIdx - 1;
+                if (t5 < 0 || t5 >= t4.length) {
+                  $async$returnValue = H.ioore(t4, t5);
+                  // goto return
+                  $async$goto = 1;
+                  break;
+                }
+                J.scrollIntoView$1$x(H.interceptedTypeCheck(t4[t5], "$isElement"), C.ScrollAlignment_TOP);
                 done = false;
                 // goto after while
                 $async$goto = 7;
@@ -2714,6 +2722,13 @@
       return P._asyncStartSync($async$main, $async$completer);
     },
     main_isTrans: function main_isTrans() {
+    },
+    main_pageIsTrans: function main_pageIsTrans(t0, t1, t2, t3) {
+      var _ = this;
+      _._box_0 = t0;
+      _.i = t1;
+      _.isTrans = t2;
+      _.col = t3;
     }
   };
   var holders = [C, H, J, P, W, F];
@@ -4099,6 +4114,19 @@
     },
     $signature: 18
   };
+  F.main_pageIsTrans.prototype = {
+    call$0: function() {
+      var jj, t1, t2, t3, t4;
+      for (jj = this.i, t1 = this._box_0, t2 = this.isTrans, t3 = this.col, t4 = t3._nodeList, t3 = H.getTypeArgumentByIndex(t3, 0); jj < t1.lastPageIdx; ++jj) {
+        if (jj >= t4.length)
+          return H.ioore(t4, jj);
+        if (!t2.call$1(H.assertSubtypeOfRuntimeType(t4[jj], t3)))
+          return false;
+      }
+      return true;
+    },
+    $signature: 19
+  };
   (function aliases() {
     var _ = J.Interceptor.prototype;
     _.super$Interceptor$toString = _.toString$0;
@@ -4129,7 +4157,7 @@
     _inheritMany(P.Iterable, [H.MappedIterable, H.WhereIterable]);
     _inheritMany(P.Iterator, [H.MappedIterator, H.WhereIterator]);
     _inheritMany(P.Error, [H.NullError, H.JsNoSuchMethodError, H.UnknownJsTypeError, H.TypeErrorImplementation, H.CastErrorImplementation, H.RuntimeError, P.NullThrownError, P.ArgumentError, P.UnsupportedError, P.UnimplementedError, P.StateError, P.ConcurrentModificationError, P.CyclicInitializationError]);
-    _inheritMany(H.Closure, [H.unwrapException_saveStackTrace, H.TearOffClosure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._AsyncAwaitCompleter_complete_closure, P._AsyncAwaitCompleter_completeError_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, F.main_isTrans]);
+    _inheritMany(H.Closure, [H.unwrapException_saveStackTrace, H.TearOffClosure, H.initHooks_closure, H.initHooks_closure0, H.initHooks_closure1, P._AsyncRun__initializeScheduleImmediate_internalCallback, P._AsyncRun__initializeScheduleImmediate_closure, P._AsyncRun__scheduleImmediateJsOverride_internalCallback, P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback, P._TimerImpl_internalCallback, P._AsyncAwaitCompleter_complete_closure, P._AsyncAwaitCompleter_completeError_closure, P._awaitOnObject_closure, P._awaitOnObject_closure0, P._wrapJsFunctionForAsync_closure, P.Future_Future$delayed_closure, P._Future__addListener_closure, P._Future__prependListeners_closure, P._Future__chainForeignFuture_closure, P._Future__chainForeignFuture_closure0, P._Future__chainForeignFuture_closure1, P._Future__propagateToListeners_handleWhenCompleteCallback, P._Future__propagateToListeners_handleWhenCompleteCallback_closure, P._Future__propagateToListeners_handleValueCallback, P._Future__propagateToListeners_handleError, P._rootHandleUncaughtError_closure, P._RootZone_bindCallback_closure, P._RootZone_bindCallbackGuarded_closure, P.Duration_toString_sixDigits, P.Duration_toString_twoDigits, P.FilteredElementList__iterable_closure, P.FilteredElementList__iterable_closure0, F.main_isTrans, F.main_pageIsTrans]);
     _inheritMany(H.TearOffClosure, [H.StaticClosure, H.BoundClosure]);
     _inherit(P._SyncCompleter, P._Completer);
     _inherit(P._RootZone, P._Zone);
@@ -4384,7 +4412,7 @@
       return [];
     });
   })();
-  var init = {mangledGlobalNames: {int: "int", double: "double", num: "num", String: "String", bool: "bool", Null: "Null", List: "List"}, mangledNames: {}, getTypeFromName: getGlobalFromName, metadata: [], types: [{func: 1, ret: P.Null}, {func: 1, ret: -1}, {func: 1, ret: -1, args: [{func: 1, ret: -1}]}, {func: 1, args: [,]}, {func: 1, ret: P.Null, args: [,]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, ret: P.Null, args: [{func: 1, ret: -1}]}, {func: 1, ret: -1, args: [,]}, {func: 1, ret: P.Null, args: [, P.StackTrace]}, {func: 1, ret: P.Null, args: [P.int,,]}, {func: 1, ret: -1, args: [P.Object], opt: [P.StackTrace]}, {func: 1, ret: -1, opt: [P.Object]}, {func: 1, ret: P.Null, args: [,], opt: [P.StackTrace]}, {func: 1, ret: [P._Future,,], args: [,]}, {func: 1, ret: P.bool, args: [W.Node]}, {func: 1, ret: W.Element, args: [W.Node]}, {func: 1, ret: P.bool, args: [W.Element]}], interceptorsByTag: null, leafTags: null};
+  var init = {mangledGlobalNames: {int: "int", double: "double", num: "num", String: "String", bool: "bool", Null: "Null", List: "List"}, mangledNames: {}, getTypeFromName: getGlobalFromName, metadata: [], types: [{func: 1, ret: P.Null}, {func: 1, ret: -1}, {func: 1, ret: -1, args: [{func: 1, ret: -1}]}, {func: 1, args: [,]}, {func: 1, ret: P.Null, args: [,]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, ret: P.Null, args: [{func: 1, ret: -1}]}, {func: 1, ret: -1, args: [,]}, {func: 1, ret: P.Null, args: [, P.StackTrace]}, {func: 1, ret: P.Null, args: [P.int,,]}, {func: 1, ret: -1, args: [P.Object], opt: [P.StackTrace]}, {func: 1, ret: -1, opt: [P.Object]}, {func: 1, ret: P.Null, args: [,], opt: [P.StackTrace]}, {func: 1, ret: [P._Future,,], args: [,]}, {func: 1, ret: P.bool, args: [W.Node]}, {func: 1, ret: W.Element, args: [W.Node]}, {func: 1, ret: P.bool, args: [W.Element]}, {func: 1, ret: P.bool}], interceptorsByTag: null, leafTags: null};
   (function nativeSupport() {
     !function() {
       var intern = function(s) {
