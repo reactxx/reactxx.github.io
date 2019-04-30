@@ -1456,7 +1456,7 @@
       this.prototypeForTag = t0;
     },
     extractKeys: function(victim) {
-      return J.JSArray_markFixedList(H.setRuntimeTypeInfo(victim ? Object.keys(victim) : [], [null]));
+      return J.JSArray_JSArray$markFixed(victim ? Object.keys(victim) : [], null);
     },
     printString: function(string) {
       if (typeof dartPrint == "function") {
@@ -1520,6 +1520,9 @@
       }
       return C.UnknownJavaScriptObject_methods;
     },
+    JSArray_JSArray$markFixed: function(allocation, $E) {
+      return J.JSArray_markFixedList(H.setRuntimeTypeInfo(allocation, [$E]));
+    },
     JSArray_markFixedList: function(list) {
       H.listTypeCheck(list);
       list.fixed$length = Array;
@@ -1578,11 +1581,26 @@
         return receiver;
       return J.getNativeInterceptor(receiver);
     },
+    getInterceptor$x: function(receiver) {
+      if (receiver == null)
+        return receiver;
+      if (typeof receiver != "object") {
+        if (typeof receiver == "function")
+          return J.JavaScriptFunction.prototype;
+        return receiver;
+      }
+      if (receiver instanceof P.Object)
+        return receiver;
+      return J.getNativeInterceptor(receiver);
+    },
     get$iterator$ax: function(receiver) {
       return J.getInterceptor$ax(receiver).get$iterator(receiver);
     },
     get$length$asx: function(receiver) {
       return J.getInterceptor$asx(receiver).get$length(receiver);
+    },
+    scrollIntoView$1$x: function(receiver, a0) {
+      return J.getInterceptor$x(receiver).scrollIntoView$1(receiver, a0);
     },
     toString$0$: function(receiver) {
       return J.getInterceptor$(receiver).toString$0(receiver);
@@ -2298,6 +2316,18 @@
     },
     StringBuffer: function StringBuffer(t0) {
       this._contents = t0;
+    },
+    _Platform__environment: function() {
+      throw H.wrapException(P.UnsupportedError$("Platform._environment"));
+    },
+    _Platform_environment: function() {
+      var t1, t2;
+      t1 = $._Platform__environmentCache;
+      if (t1 == null)
+        P._Platform__environment();
+      t2 = P.String;
+      H.assertSubtype(t1, "$isMap", [t2, t2], "$asMap");
+      return t1;
     }
   },
   W = {
@@ -2324,6 +2354,9 @@
       this.$ti = t1;
     },
     Element: function Element() {
+    },
+    ScrollAlignment: function ScrollAlignment(t0) {
+      this._value = t0;
     },
     EventTarget: function EventTarget() {
     },
@@ -2362,7 +2395,7 @@
     main: function() {
       var $async$goto = 0,
         $async$completer = P._makeAsyncAwaitCompleter(null),
-        $async$returnValue, t1, height, t2, t3, i, firstWrong, lastPageIdx, lastMustBeOK, lastWrong, ph, hasScrollIntoViewIfNeeded;
+        $async$returnValue, t1, height, t2, t3, i, firstWrong, lastPageIdx, lastMustBeOK, lastWrong, ph;
       var $async$main = P._wrapJsFunctionForAsync(function($async$errorCode, $async$result) {
         if ($async$errorCode === 1)
           return P._asyncRethrow($async$result, $async$completer);
@@ -2398,11 +2431,12 @@
                   break;
                 }
                 firstWrong = H.interceptedTypeCheck(t3[i], "$isElement");
-                if (firstWrong.querySelector("span") != null) {
+                if (firstWrong.querySelector($.$get$okTag()) != null) {
                   // goto for update
                   $async$goto = 7;
                   break;
                 }
+                J.scrollIntoView$1$x(firstWrong, C.ScrollAlignment_TOP);
                 for (lastPageIdx = i + 1, lastMustBeOK = firstWrong; lastPageIdx < t3.length; ++lastPageIdx, lastMustBeOK = lastWrong) {
                   lastWrong = H.interceptedTypeCheck(t3[lastPageIdx], "$isElement");
                   ph = lastWrong.getBoundingClientRect().bottom;
@@ -2418,7 +2452,7 @@
                 H.printString(C.JSInt_methods.toString$0(lastPageIdx));
               case 9:
                 // for condition
-                if (!(lastMustBeOK.querySelector("span") == null)) {
+                if (!(lastMustBeOK.querySelector($.$get$okTag()) == null)) {
                   // goto after for
                   $async$goto = 10;
                   break;
@@ -2432,8 +2466,7 @@
                 break;
               case 10:
                 // after for
-                hasScrollIntoViewIfNeeded = !!lastMustBeOK.scrollIntoViewIfNeeded;
-                lastMustBeOK.scrollIntoView(true);
+                J.scrollIntoView$1$x(lastMustBeOK, C.ScrollAlignment_TOP);
               case 7:
                 // for update
                 ++i;
@@ -3326,7 +3359,21 @@
       return "RangeError";
     },
     get$_errorExplanation: function() {
-      return "";
+      var t1, explanation, t2;
+      t1 = this.start;
+      if (t1 == null) {
+        t1 = this.end;
+        explanation = t1 != null ? ": Not less than or equal to " + H.S(t1) : "";
+      } else {
+        t2 = this.end;
+        if (t2 == null)
+          explanation = ": Not greater than or equal to " + H.S(t1);
+        else if (t2 > t1)
+          explanation = ": Not in range " + H.S(t1) + ".." + H.S(t2) + ", inclusive";
+        else
+          explanation = t2 < t1 ? ": Valid value range is empty" : ": Only valid value is " + H.S(t1);
+      }
+      return explanation;
     }
   };
   P.IndexError.prototype = {
@@ -3458,7 +3505,26 @@
     toString$0: function(receiver) {
       return receiver.localName;
     },
+    scrollIntoView$1: function(receiver, alignment) {
+      var hasScrollIntoViewIfNeeded = !!receiver.scrollIntoViewIfNeeded;
+      if (alignment === C.ScrollAlignment_TOP)
+        receiver.scrollIntoView(true);
+      else if (alignment === C.ScrollAlignment_BOTTOM)
+        receiver.scrollIntoView(false);
+      else if (hasScrollIntoViewIfNeeded)
+        if (alignment === C.ScrollAlignment_CENTER)
+          receiver.scrollIntoViewIfNeeded(true);
+        else
+          receiver.scrollIntoViewIfNeeded();
+      else
+        receiver.scrollIntoView();
+    },
     $isElement: 1
+  };
+  W.ScrollAlignment.prototype = {
+    toString$0: function(_) {
+      return "ScrollAlignment." + this._value;
+    }
   };
   W.EventTarget.prototype = {};
   W.FormElement.prototype = {
@@ -3488,7 +3554,7 @@
       return receiver[index];
     },
     elementAt$1: function(receiver, index) {
-      if (index >= receiver.length)
+      if (index < 0 || index >= receiver.length)
         return H.ioore(receiver, index);
       return receiver[index];
     },
@@ -3581,7 +3647,7 @@
       _inherit = hunkHelpers.inherit,
       _inheritMany = hunkHelpers.inheritMany;
     _inherit(P.Object, null);
-    _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, H.ListIterator, H.TypeErrorDecoder, P.Error, H.ExceptionAndStackTrace, H.Closure, H._StackTrace, P._TimerImpl, P._AsyncAwaitCompleter, P._Completer, P._FutureListener, P._Future, P._AsyncCallbackEntry, P._StreamIterator, P.AsyncError, P._Zone, P._ListBase_Object_ListMixin, P.ListMixin, P.bool, P.num, P.Duration, P.StackOverflowError, P._Exception, P.List, P.Null, P.StackTrace, P.String, P.StringBuffer, W.ImmutableListMixin, W.FixedSizeListIterator, W._DOMWindowCrossFrame]);
+    _inheritMany(P.Object, [H.JS_CONST, J.Interceptor, J.ArrayIterator, H.ListIterator, H.TypeErrorDecoder, P.Error, H.ExceptionAndStackTrace, H.Closure, H._StackTrace, P._TimerImpl, P._AsyncAwaitCompleter, P._Completer, P._FutureListener, P._Future, P._AsyncCallbackEntry, P._StreamIterator, P.AsyncError, P._Zone, P._ListBase_Object_ListMixin, P.ListMixin, P.bool, P.num, P.Duration, P.StackOverflowError, P._Exception, P.List, P.Null, P.StackTrace, P.String, P.StringBuffer, W.ScrollAlignment, W.ImmutableListMixin, W.FixedSizeListIterator, W._DOMWindowCrossFrame]);
     _inheritMany(J.Interceptor, [J.JSBool, J.JSNull, J.JavaScriptObject, J.JSArray, J.JSNumber, J.JSString, W.EventTarget, W.DomException, W.DomRectReadOnly, W.Location, W._NodeList_Interceptor_ListMixin]);
     _inheritMany(J.JavaScriptObject, [J.PlainJavaScriptObject, J.UnknownJavaScriptObject, J.JavaScriptFunction]);
     _inherit(J.JSUnmodifiableArray, J.JSArray);
@@ -3737,6 +3803,9 @@
 ;
     C.C__RootZone = new P._RootZone();
     C.Duration_0 = new P.Duration(0);
+    C.ScrollAlignment_BOTTOM = new W.ScrollAlignment("BOTTOM");
+    C.ScrollAlignment_CENTER = new W.ScrollAlignment("CENTER");
+    C.ScrollAlignment_TOP = new W.ScrollAlignment("TOP");
   })();
   (function staticFields() {
     $.Closure_functionCounter = 0;
@@ -3754,6 +3823,7 @@
     $._lastPriorityCallback = null;
     $._isInCallbackLoop = false;
     $.Zone__current = C.C__RootZone;
+    $._Platform__environmentCache = null;
   })();
   (function lazyInitializers() {
     var _lazy = hunkHelpers.lazy;
@@ -3832,6 +3902,12 @@
     });
     _lazy($, "_toStringVisiting", "$get$_toStringVisiting", function() {
       return [];
+    });
+    _lazy($, "fileSystem_comp", "$get$fileSystem_comp", function() {
+      return P._Platform_environment()._map.$index(0, "REWISE");
+    });
+    _lazy($, "okTag", "$get$okTag", function() {
+      return $.$get$fileSystem_comp() === "ntb" ? "" : "span";
     });
   })();
   var init = {mangledGlobalNames: {int: "int", double: "double", num: "num", String: "String", bool: "bool", Null: "Null", List: "List"}, mangledNames: {}, getTypeFromName: getGlobalFromName, metadata: [], types: [{func: 1, ret: P.Null}, {func: 1, ret: -1}, {func: 1, ret: -1, args: [{func: 1, ret: -1}]}, {func: 1, args: [,]}, {func: 1, ret: P.Null, args: [,]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, ret: P.Null, args: [{func: 1, ret: -1}]}, {func: 1, ret: -1, args: [,]}, {func: 1, ret: P.Null, args: [, P.StackTrace]}, {func: 1, ret: P.Null, args: [P.int,,]}, {func: 1, ret: -1, args: [P.Object], opt: [P.StackTrace]}, {func: 1, ret: -1, opt: [P.Object]}, {func: 1, ret: P.Null, args: [,], opt: [P.StackTrace]}, {func: 1, ret: [P._Future,,], args: [,]}], interceptorsByTag: null, leafTags: null};
