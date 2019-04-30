@@ -1456,7 +1456,7 @@
       this.prototypeForTag = t0;
     },
     extractKeys: function(victim) {
-      return J.JSArray_JSArray$markFixed(victim ? Object.keys(victim) : [], null);
+      return J.JSArray_markFixedList(H.setRuntimeTypeInfo(victim ? Object.keys(victim) : [], [null]));
     },
     printString: function(string) {
       if (typeof dartPrint == "function") {
@@ -1519,9 +1519,6 @@
         return C.UnknownJavaScriptObject_methods;
       }
       return C.UnknownJavaScriptObject_methods;
-    },
-    JSArray_JSArray$markFixed: function(allocation, $E) {
-      return J.JSArray_markFixedList(H.setRuntimeTypeInfo(allocation, [$E]));
     },
     JSArray_markFixedList: function(list) {
       H.listTypeCheck(list);
@@ -2316,18 +2313,6 @@
     },
     StringBuffer: function StringBuffer(t0) {
       this._contents = t0;
-    },
-    _Platform__environment: function() {
-      throw H.wrapException(P.UnsupportedError$("Platform._environment"));
-    },
-    _Platform_environment: function() {
-      var t1, t2;
-      t1 = $._Platform__environmentCache;
-      if (t1 == null)
-        P._Platform__environment();
-      t2 = P.String;
-      H.assertSubtype(t1, "$isMap", [t2, t2], "$asMap");
-      return t1;
     }
   },
   W = {
@@ -2431,7 +2416,7 @@
                   break;
                 }
                 firstWrong = H.interceptedTypeCheck(t3[i], "$isElement");
-                if (firstWrong.querySelector($.$get$okTag()) != null) {
+                if (firstWrong.querySelector("span") != null) {
                   // goto for update
                   $async$goto = 7;
                   break;
@@ -2452,7 +2437,7 @@
                 H.printString(C.JSInt_methods.toString$0(lastPageIdx));
               case 9:
                 // for condition
-                if (!(lastMustBeOK.querySelector($.$get$okTag()) == null)) {
+                if (!(lastMustBeOK.querySelector("span") == null)) {
                   // goto after for
                   $async$goto = 10;
                   break;
@@ -3359,21 +3344,7 @@
       return "RangeError";
     },
     get$_errorExplanation: function() {
-      var t1, explanation, t2;
-      t1 = this.start;
-      if (t1 == null) {
-        t1 = this.end;
-        explanation = t1 != null ? ": Not less than or equal to " + H.S(t1) : "";
-      } else {
-        t2 = this.end;
-        if (t2 == null)
-          explanation = ": Not greater than or equal to " + H.S(t1);
-        else if (t2 > t1)
-          explanation = ": Not in range " + H.S(t1) + ".." + H.S(t2) + ", inclusive";
-        else
-          explanation = t2 < t1 ? ": Valid value range is empty" : ": Only valid value is " + H.S(t1);
-      }
-      return explanation;
+      return "";
     }
   };
   P.IndexError.prototype = {
@@ -3554,7 +3525,7 @@
       return receiver[index];
     },
     elementAt$1: function(receiver, index) {
-      if (index < 0 || index >= receiver.length)
+      if (index >= receiver.length)
         return H.ioore(receiver, index);
       return receiver[index];
     },
@@ -3823,7 +3794,6 @@
     $._lastPriorityCallback = null;
     $._isInCallbackLoop = false;
     $.Zone__current = C.C__RootZone;
-    $._Platform__environmentCache = null;
   })();
   (function lazyInitializers() {
     var _lazy = hunkHelpers.lazy;
@@ -3902,12 +3872,6 @@
     });
     _lazy($, "_toStringVisiting", "$get$_toStringVisiting", function() {
       return [];
-    });
-    _lazy($, "fileSystem_comp", "$get$fileSystem_comp", function() {
-      return P._Platform_environment()._map.$index(0, "REWISE");
-    });
-    _lazy($, "okTag", "$get$okTag", function() {
-      return $.$get$fileSystem_comp() === "ntb" ? "" : "span";
     });
   })();
   var init = {mangledGlobalNames: {int: "int", double: "double", num: "num", String: "String", bool: "bool", Null: "Null", List: "List"}, mangledNames: {}, getTypeFromName: getGlobalFromName, metadata: [], types: [{func: 1, ret: P.Null}, {func: 1, ret: -1}, {func: 1, ret: -1, args: [{func: 1, ret: -1}]}, {func: 1, args: [,]}, {func: 1, ret: P.Null, args: [,]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, ret: P.Null, args: [{func: 1, ret: -1}]}, {func: 1, ret: -1, args: [,]}, {func: 1, ret: P.Null, args: [, P.StackTrace]}, {func: 1, ret: P.Null, args: [P.int,,]}, {func: 1, ret: -1, args: [P.Object], opt: [P.StackTrace]}, {func: 1, ret: -1, opt: [P.Object]}, {func: 1, ret: P.Null, args: [,], opt: [P.StackTrace]}, {func: 1, ret: [P._Future,,], args: [,]}], interceptorsByTag: null, leafTags: null};
